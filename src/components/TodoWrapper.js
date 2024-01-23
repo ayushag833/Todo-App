@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import EditTodoForm from "./EditTodoForm";
 import { v4 as uuidv4 } from "uuid";
@@ -6,7 +6,16 @@ import Todo from "./Todo";
 uuidv4();
 
 const TodoWrapper = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const localStorageData = localStorage.getItem("Tasks");
+    if (localStorageData == null) return [];
+    return JSON.parse(localStorageData);
+  });
+  
+  useEffect(() => {
+    localStorage.setItem("Tasks", JSON.stringify(todos));
+  }, [todos]);
+
   const addTodo = (todo) => {
     setTodos([
       ...todos,
@@ -26,14 +35,12 @@ const TodoWrapper = () => {
   const editTodo = (id) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, isEditing: !todo.isEditing }
-          : { ...todo }
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : { ...todo }
       )
     );
   };
 
-  const editTask = (task , id) => {
+  const editTask = (task, id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id
@@ -48,8 +55,8 @@ const TodoWrapper = () => {
   };
 
   return (
-    <div className="">
-      <h1>Todo App</h1>
+    <div className="h-min w-min p-5 bg-slate-100">
+      <h1 className="text-center ">Todo App</h1>
       <TodoForm addTodo={addTodo} />
       {todos.map((todo) =>
         todo.isEditing ? (

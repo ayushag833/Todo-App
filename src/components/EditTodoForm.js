@@ -10,7 +10,7 @@ const EditTodoForm = ({ editTask, todo }) => {
 
   return (
     <div>
-      <form className="" onSubmit={submitHandler}>
+      <form className="flex" onSubmit={submitHandler}>
         <input
           type="text"
           placeholder="Update Todo"

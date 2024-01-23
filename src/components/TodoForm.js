@@ -10,7 +10,7 @@ const TodoForm = ({ addTodo }) => {
 
   return (
     <div>
-      <form className="" onSubmit={submitHandler}>
+      <form className="flex whitespace-nowrap" onSubmit={submitHandler}>
         <input
           type="text"
           placeholder="What is the task today?"
