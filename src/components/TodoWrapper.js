@@ -11,17 +11,17 @@ const TodoWrapper = () => {
     if (localStorageData == null) return [];
     return JSON.parse(localStorageData);
   });
-  
+
   useEffect(() => {
     localStorage.setItem("Tasks", JSON.stringify(todos));
   }, [todos]);
 
   const addTodo = (todo) => {
-    setTodos([
-      ...todos,
-      { id: uuidv4(), task: todo, completed: false, isEditing: false },
-    ]);
-    console.log(todos);
+    todo.length > 0 &&
+      setTodos([
+        ...todos,
+        { id: uuidv4(), task: todo, completed: false, isEditing: false },
+      ]);
   };
 
   const toggleComplete = (id) => {
@@ -55,8 +55,10 @@ const TodoWrapper = () => {
   };
 
   return (
-    <div className="h-min w-min p-5 bg-slate-100">
-      <h1 className="text-center ">Todo App</h1>
+    <div className="p-5 bg-white w-11/12 md:w-8/12 lg:w-5/12">
+      <h1 className="text-center text-blue-700 text-3xl font-medium m-3 mb-10">
+        Todo App
+      </h1>
       <TodoForm addTodo={addTodo} />
       {todos.map((todo) =>
         todo.isEditing ? (
