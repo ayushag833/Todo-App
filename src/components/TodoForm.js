@@ -21,7 +21,7 @@ const TodoForm = ({ addTodo }) => {
           onChange={(e) => {
             setData(e.target.value);
           }}
-          className="bg-slate-300 placeholder-black m-2 md:m-5 rounded-full w-full sm:w-11/12 focus:outline-none text-base md:text-xl"
+          className="bg-slate-300 placeholder-[#666] pl-3 m-2 md:m-5 rounded-full w-full sm:w-11/12 focus:outline-none text-base md:text-xl"
         />
         <button
           type="submit"
